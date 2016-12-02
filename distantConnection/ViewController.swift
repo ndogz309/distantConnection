@@ -20,6 +20,8 @@ class ViewController: UIViewController,CLLocationManagerDelegate,UITextFieldDele
     var currentLocation: CLLocation!
     let geocoder = CLGeocoder()
     var toLocation: CLLocation!
+    var angleDegrees:Double!
+
     
     
 
@@ -77,7 +79,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate,UITextFieldDele
         print("heading accuracy")
         print(manager.heading?.headingAccuracy)
         
-        
+        calculateAngle()
 
         
     }
@@ -154,12 +156,36 @@ func setCurrentLocation(completion: (_ success: Bool) -> Void){
         
     }
     
+    func degreesToRadians(degrees: Double) -> Double { return degrees * M_PI / 180.0 }
+    func radiansToDegrees(radians: Double) -> Double { return radians * 180.0 / M_PI }
+    
+    
+    
+    
+    func calculateAngle() {
+        
+        //bearing calculations:  http://www.movable-type.co.uk/scripts/latlong.html
+        //need to check this
+        
+        
+        let lat1 = degreesToRadians(degrees: currentLocation.coordinate.latitude)
+        let lon1 = degreesToRadians(degrees: currentLocation.coordinate.longitude)
+        
+        let lat2 = degreesToRadians(degrees: toLocation.coordinate.latitude)
+        let lon2 = degreesToRadians(degrees: toLocation.coordinate.longitude)
+        
+        let dLon = lon2 - lon1
+        
+        let y = sin(dLon) * cos(lat2)
+        let x = cos(lat1) * sin(lat2) - sin(lat1) * cos(lat2) * cos(dLon)
+        let radiansBearing = atan2(y, x)
+        
+        print("angleeeee issssssss")
+        print(radiansToDegrees(radians: radiansBearing))
+    
+    }
 
-    
-    
-    
-    
-    
+
     
     
     
