@@ -10,7 +10,7 @@ import UIKit
 import CoreLocation
 import Foundation
 
-class ViewController: UIViewController,CLLocationManagerDelegate {
+class ViewController: UIViewController,CLLocationManagerDelegate,UITextFieldDelegate {
     
     @IBOutlet weak var addressTextField: UITextField!
     @IBOutlet weak var distanceLabel: UILabel!
@@ -26,6 +26,9 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     override func viewDidLoad() {
        
         super.viewDidLoad()
+        
+        addressTextField.delegate = self
+        
         
         manager=CLLocationManager()
         manager.delegate = self
@@ -47,6 +50,22 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     
     
     }
+    
+    
+    
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        
+        textField.resignFirstResponder()
+        
+        geocodeAddress()
+        return true
+    }
+    
+    
+    
+
     
     func locationManager(_: CLLocationManager, didUpdateLocations: [CLLocation]){
         print("here")
