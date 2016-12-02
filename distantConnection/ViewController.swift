@@ -15,6 +15,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         var manager: CLLocationManager!
         var currentLocation: CLLocation!
     let geocoder = CLGeocoder()
+        var toLocation: CLLocation!
     
     
 
@@ -79,7 +80,10 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
             
             print ("geolong isssssss")
             print(geoLong)
-
+            
+            
+            self.toLocation = CLLocation(latitude: geoLat!, longitude: geoLong!)
+            self.calculateDistance()
             
         })
         
@@ -88,6 +92,21 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
 
     
     
+    func calculateDistance(){
+       
+        print(toLocation)
+        print(currentLocation)
+        
+        let distance = currentLocation.distance(from: self.toLocation)
+        
+        print("----------distance is")
+        print(distance)
+ 
+    
+        
+    }
+    
+
     
     
     
