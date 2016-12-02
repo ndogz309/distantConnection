@@ -12,10 +12,14 @@ import Foundation
 
 class ViewController: UIViewController,CLLocationManagerDelegate {
     
-        var manager: CLLocationManager!
-        var currentLocation: CLLocation!
+    @IBOutlet weak var addressTextField: UITextField!
+    @IBOutlet weak var distanceLabel: UILabel!
+    
+    
+    var manager: CLLocationManager!
+    var currentLocation: CLLocation!
     let geocoder = CLGeocoder()
-        var toLocation: CLLocation!
+    var toLocation: CLLocation!
     
     
 
@@ -30,11 +34,19 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         manager.startUpdatingLocation()
  
         
-        
-        geocodeAddress()
+   
     }
     
     
+    @IBAction func geocodeButtonPressed(_ sender: Any) {
+        
+        
+        geocodeAddress()
+    
+    addressTextField.endEditing(true)
+    
+    
+    }
     
     func locationManager(_: CLLocationManager, didUpdateLocations: [CLLocation]){
         print("here")
@@ -65,25 +77,25 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
 
     
     func geocodeAddress() {
-        let address = "2779 21st street san fransisco"
-        
-        
-        geocoder.geocodeAddressString(address, completionHandler: {(placemarks: [CLPlacemark]?, error: Error?) -> Void in
+        let address = addressTextField.text
+        geocoder.geocodeAddressString(address!, completionHandler: {(placemarks: [CLPlacemark]?, error: Error?) -> Void in
             
             let placemark = placemarks?[0]
             let geoLat=placemark?.location!.coordinate.latitude
             let geoLong=placemark?.location!.coordinate.longitude
             
-    
+            self.toLocation = CLLocation(latitude: geoLat!, longitude: geoLong!)
+            
+            print("tooooooo loccccation")
+            print(self.toLocation)
+            
             print("geolat is")
             print(geoLat)
             
             print ("geolong isssssss")
             print(geoLong)
             
-            
-            self.toLocation = CLLocation(latitude: geoLat!, longitude: geoLong!)
-            self.calculateDistance()
+self.calculateDistance()
             
         })
         
@@ -101,7 +113,14 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         
         print("----------distance is")
         print(distance)
- 
+        let distanceInt = Int(distance)
+        
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = NumberFormatter.Style.decimal
+        numberFormatter.string(from: NSNumber(value: distanceInt))
+        
+        distanceLabel.text=numberFormatter.string(from: NSNumber(value: distanceInt))
+
     
         
     }
