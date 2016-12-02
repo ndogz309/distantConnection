@@ -126,6 +126,20 @@ func geocodeAddress() {
    let address = addressTextField.text
         geocoder.geocodeAddressString(address!, completionHandler: {(placemarks: [CLPlacemark]?, error: Error?) -> Void in
             
+            if (error != nil){
+                
+                print("something went wrong")
+                
+                let alert = UIAlertController(title: "Alert", message: "Cant find that location try again", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+                
+                
+                
+            }
+            
+            else{
+            
             let placemark = placemarks?[0]
             let geoLat=placemark?.location!.coordinate.latitude
             let geoLong=placemark?.location!.coordinate.longitude
@@ -142,6 +156,7 @@ func geocodeAddress() {
             print(geoLong)
             self.manager.startUpdatingLocation()
             self.manager.startUpdatingHeading()
+            }
             
         })
         
