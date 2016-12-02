@@ -15,6 +15,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate,UITextFieldDele
     @IBOutlet weak var addressTextField: UITextField!
     @IBOutlet weak var distanceLabel: UILabel!
     
+    @IBOutlet weak var arrowView: UIView!
     
     var manager: CLLocationManager!
     var currentLocation: CLLocation!
@@ -81,6 +82,10 @@ class ViewController: UIViewController,CLLocationManagerDelegate,UITextFieldDele
         
         calculateAngle()
 
+         var rotationDegrees = angleDegrees-(manager.heading?.trueHeading)!
+        print("need to rotate image by")
+        print(rotationDegrees)
+        arrowView.transform = CGAffineTransform(rotationAngle: CGFloat(degreesToRadians(degrees: rotationDegrees)))
         
     }
     
@@ -108,7 +113,7 @@ func setCurrentLocation(completion: (_ success: Bool) -> Void){
     
 
     
-    func geocodeAddress() {
+func geocodeAddress() {
    let address = addressTextField.text
         geocoder.geocodeAddressString(address!, completionHandler: {(placemarks: [CLPlacemark]?, error: Error?) -> Void in
             
@@ -182,7 +187,16 @@ func setCurrentLocation(completion: (_ success: Bool) -> Void){
         
         print("angleeeee issssssss")
         print(radiansToDegrees(radians: radiansBearing))
-    
+
+        angleDegrees=radiansToDegrees(radians: radiansBearing)
+        
+       // var rotationDegrees = angleDegrees-(manager.heading?.trueHeading)!
+        //print("need to rotate image by")
+        //print(rotationDegrees)
+        
+        
+        
+        
     }
 
 
