@@ -34,18 +34,12 @@ class ViewController: UIViewController,CLLocationManagerDelegate,UITextFieldDele
         manager.delegate = self
         manager.desiredAccuracy=kCLLocationAccuracyBest
         manager.requestWhenInUseAuthorization()
-        manager.startUpdatingLocation()
-        manager.startUpdatingHeading()
-        
-   
     }
     
     
     @IBAction func geocodeButtonPressed(_ sender: Any) {
         geocodeAddress()
         addressTextField.endEditing(true)
-    
-    
     }
     
     
@@ -63,8 +57,13 @@ class ViewController: UIViewController,CLLocationManagerDelegate,UITextFieldDele
     
     func locationManager(_: CLLocationManager, didUpdateLocations: [CLLocation]){
         print("here")
-        setCurrentLocation()
-        
+        setCurrentLocation { (success) -> Void in
+            if success {
+                print("compppplllllleeeeeetiiiiiiioooooonnnnnnnnnnnnnnnnnn ")
+                calculateDistance()
+ 
+            }
+        }
     }
     
     
@@ -83,30 +82,32 @@ class ViewController: UIViewController,CLLocationManagerDelegate,UITextFieldDele
         
     }
     
-
     
-    func setCurrentLocation(){
+func setCurrentLocation(completion: (_ success: Bool) -> Void){
         
         
         currentLocation=manager.location
         
-     
-        let lat = currentLocation.coordinate.latitude
-        let long = currentLocation.coordinate.longitude
+        var lat = currentLocation.coordinate.latitude
+        var long = currentLocation.coordinate.longitude
         
         print("lat isssss")
         print (lat)
         
         print ("long is")
         print(long)
-
- 
+        manager.stopUpdatingLocation()
+        
+        
+        
+        completion(true)
         
     }
+    
 
     
     func geocodeAddress() {
-        let address = addressTextField.text
+   let address = addressTextField.text
         geocoder.geocodeAddressString(address!, completionHandler: {(placemarks: [CLPlacemark]?, error: Error?) -> Void in
             
             let placemark = placemarks?[0]
@@ -123,15 +124,14 @@ class ViewController: UIViewController,CLLocationManagerDelegate,UITextFieldDele
             
             print ("geolong isssssss")
             print(geoLong)
-            
-self.calculateDistance()
+            self.manager.startUpdatingLocation()
+            self.manager.startUpdatingHeading()
             
         })
         
  
     }
 
-    
     
     func calculateDistance(){
        
