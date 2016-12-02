@@ -14,6 +14,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     
         var manager: CLLocationManager!
         var currentLocation: CLLocation!
+    let geocoder = CLGeocoder()
     
     
 
@@ -26,9 +27,10 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         manager.desiredAccuracy=kCLLocationAccuracyBest
         manager.requestWhenInUseAuthorization()
         manager.startUpdatingLocation()
+ 
         
         
-  
+        geocodeAddress()
     }
     
     
@@ -55,9 +57,33 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         
         print ("long is")
         print(long)
-        manager.stopUpdatingLocation()
+
  
         
+    }
+
+    
+    func geocodeAddress() {
+        let address = "2779 21st street san fransisco"
+        
+        
+        geocoder.geocodeAddressString(address, completionHandler: {(placemarks: [CLPlacemark]?, error: Error?) -> Void in
+            
+            let placemark = placemarks?[0]
+            let geoLat=placemark?.location!.coordinate.latitude
+            let geoLong=placemark?.location!.coordinate.longitude
+            
+    
+            print("geolat is")
+            print(geoLat)
+            
+            print ("geolong isssssss")
+            print(geoLong)
+
+            
+        })
+        
+ 
     }
 
     
