@@ -31,7 +31,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate,UITextFieldDele
         super.viewDidLoad()
         
         addressTextField.delegate = self
-        
+
         
         manager=CLLocationManager()
         manager.delegate = self
@@ -46,7 +46,16 @@ class ViewController: UIViewController,CLLocationManagerDelegate,UITextFieldDele
     }
     
     
-    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+        print("TextField did begin editing method called")
+         self.manager.stopUpdatingHeading()
+        addressTextField.text=""
+        distanceLabel.text=""
+         arrowView.transform = CGAffineTransform(rotationAngle: CGFloat(0))
+        
+        
+    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
