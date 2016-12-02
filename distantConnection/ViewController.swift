@@ -7,13 +7,71 @@
 //
 
 import UIKit
+import CoreLocation
+import Foundation
 
-class ViewController: UIViewController {
+class ViewController: UIViewController,CLLocationManagerDelegate {
+    
+        var manager: CLLocationManager!
+        var currentLocation: CLLocation!
+    
+    
 
     override func viewDidLoad() {
+       
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        manager=CLLocationManager()
+        manager.delegate = self
+        manager.desiredAccuracy=kCLLocationAccuracyBest
+        manager.requestWhenInUseAuthorization()
+        manager.startUpdatingLocation()
+        
+        
+  
     }
+    
+    
+    
+    func locationManager(_: CLLocationManager, didUpdateLocations: [CLLocation]){
+        print("here")
+   setCurrentLocation()
+        
+    }
+    
+    
+    
+    func setCurrentLocation(){
+        
+        
+        currentLocation=manager.location
+        
+     
+        let lat = currentLocation.coordinate.latitude
+        let long = currentLocation.coordinate.longitude
+        
+        print("lat isssss")
+        print (lat)
+        
+        print ("long is")
+        print(long)
+        manager.stopUpdatingLocation()
+ 
+        
+    }
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
