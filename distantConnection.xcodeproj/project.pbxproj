@@ -14,6 +14,7 @@
 		4B94E2421DF2090600DA74E1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4B94E2401DF2090600DA74E1 /* LaunchScreen.storyboard */; };
 		4B94E24D1DF2090600DA74E1 /* distantConnectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B94E24C1DF2090600DA74E1 /* distantConnectionTests.swift */; };
 		4B94E2581DF2090600DA74E1 /* distantConnectionUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B94E2571DF2090600DA74E1 /* distantConnectionUITests.swift */; };
+		4B94E2681DF21F9000DA74E1 /* arrowCropped.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 4B94E2671DF21F9000DA74E1 /* arrowCropped.jpeg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		4B94E2531DF2090600DA74E1 /* distantConnectionUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = distantConnectionUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B94E2571DF2090600DA74E1 /* distantConnectionUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = distantConnectionUITests.swift; sourceTree = "<group>"; };
 		4B94E2591DF2090600DA74E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4B94E2671DF21F9000DA74E1 /* arrowCropped.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = arrowCropped.jpeg; path = ../../../Downloads/arrowCropped.jpeg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 				4B94E2371DF2090600DA74E1 /* AppDelegate.swift */,
 				4B94E2391DF2090600DA74E1 /* ViewController.swift */,
 				4B94E23B1DF2090600DA74E1 /* Main.storyboard */,
+				4B94E2671DF21F9000DA74E1 /* arrowCropped.jpeg */,
 				4B94E23E1DF2090600DA74E1 /* Assets.xcassets */,
 				4B94E2401DF2090600DA74E1 /* LaunchScreen.storyboard */,
 				4B94E2431DF2090600DA74E1 /* Info.plist */,
@@ -236,6 +239,7 @@
 				4B94E2421DF2090600DA74E1 /* LaunchScreen.storyboard in Resources */,
 				4B94E23F1DF2090600DA74E1 /* Assets.xcassets in Resources */,
 				4B94E23D1DF2090600DA74E1 /* Main.storyboard in Resources */,
+				4B94E2681DF21F9000DA74E1 /* arrowCropped.jpeg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
