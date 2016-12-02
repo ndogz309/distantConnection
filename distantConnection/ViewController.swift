@@ -35,18 +35,15 @@ class ViewController: UIViewController,CLLocationManagerDelegate,UITextFieldDele
         manager.desiredAccuracy=kCLLocationAccuracyBest
         manager.requestWhenInUseAuthorization()
         manager.startUpdatingLocation()
- 
+        manager.startUpdatingHeading()
         
    
     }
     
     
     @IBAction func geocodeButtonPressed(_ sender: Any) {
-        
-        
         geocodeAddress()
-    
-    addressTextField.endEditing(true)
+        addressTextField.endEditing(true)
     
     
     }
@@ -55,10 +52,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate,UITextFieldDele
     
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
-        
         textField.resignFirstResponder()
-        
         geocodeAddress()
         return true
     }
@@ -69,11 +63,27 @@ class ViewController: UIViewController,CLLocationManagerDelegate,UITextFieldDele
     
     func locationManager(_: CLLocationManager, didUpdateLocations: [CLLocation]){
         print("here")
-   setCurrentLocation()
+        setCurrentLocation()
         
     }
     
     
+    func locationManager(_: CLLocationManager, didUpdateHeading: CLHeading){
+        
+ //do we want true or magnetic north???
+        
+        print("i am pointing")
+        print(manager.heading?.trueHeading)
+        
+        print("heading accuracy")
+        print(manager.heading?.headingAccuracy)
+        
+        
+
+        
+    }
+    
+
     
     func setCurrentLocation(){
         
@@ -145,8 +155,6 @@ self.calculateDistance()
     }
     
 
-    
-    
     
     
     
